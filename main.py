@@ -1,9 +1,27 @@
 import random
 
 
+def lire_fichier(nom_fichier):
+    with open(nom_fichier, 'r') as fichier:
+        lignes = fichier.readlines()
+        list = []
+
+        for ligne in lignes:
+            # Vérifier que la ligne commence par 'e'
+            if ligne.startswith('e'):
+                try:
+                    
+                    decomposeligne = ligne.split(" ")
+                    list.append((int(decomposeligne[1]),int(decomposeligne[2])))
+                except ValueError:
+                    print(f"Erreur")
+
+    return list
+
 def remplirPoids(nb):
     objects = []
     poid = 10
+    sommet = 0
 
     quotient = nb // 41
     reste = nb % 41
@@ -11,7 +29,8 @@ def remplirPoids(nb):
     # Générer les poids en [10;50] uniformément 
     for i in range(41):
         for j in range(quotient):
-            objects.append((3,poid))
+            objects.append((sommet,poid))
+            sommet=sommet+1
         poid = poid +1
 
 
@@ -38,7 +57,7 @@ def FractionalPacking(listObjets, tailleBoite):
 
 # Q2
 def FirstFitDecreasingPacking(listObjets, tailleBoite):
-    listeTuples =[]
+    
 
     return 3
 
@@ -49,25 +68,27 @@ def BestFitDecreasingPacking():
 
 # On considère la capacité de chaque bin H = 150
 
+
 ## QUESTION 1
+print("Question 1")
 # Exemple d'utilisation pour 125 
-objects = remplirPoids(125)
-result = FractionalPacking(objects, 150)
+objects_125 = remplirPoids(125)
+result = FractionalPacking(objects_125, 150)
 print("Nombre de boîtes utilisées:", result)
 
 # Exemple d'utilisation pour 250
-objects = remplirPoids(250)
-result = FractionalPacking(objects, 150)
+objects_250 = remplirPoids(250)
+result = FractionalPacking(objects_250, 150)
 print("Nombre de boîtes utilisées:", result)
 
 # Exemple d'utilisation pour 500
-objects = remplirPoids(500)
-result = FractionalPacking(objects, 150)
+objects_500 = remplirPoids(500)
+result = FractionalPacking(objects_500, 150)
 print("Nombre de boîtes utilisées:", result)
 
 # Exemple d'utilisation pour 500
-objects = remplirPoids(1000)
-result = FractionalPacking(objects, 150)
+objects_1000 = remplirPoids(1000)
+result = FractionalPacking(objects_1000, 150)
 print("Nombre de boîtes utilisées:", result)
 
 
@@ -75,30 +96,27 @@ print("Nombre de boîtes utilisées:", result)
 
 
 ## QUESTION 2 
-def lire_fichier(nom_fichier):
-    with open(nom_fichier, 'r') as fichier:
-        lignes = fichier.readlines()
-        list = []
-
-        for ligne in lignes:
-            # Vérifier que la ligne commence par 'e'
-            if ligne.startswith('e'):
-                try:
-                    
-                    decomposeligne = ligne.split(" ")
-                    list.append((decomposeligne[1],decomposeligne[2]))
-                except ValueError:
-                    print(f"Erreur")
-
-    return list
 # Lire les objets à partir du fichier
-list = lire_fichier("DSJC500.5.txt")
+listFichier_125 = lire_fichier("DSJC125.5.txt")
+listFichier_250 = lire_fichier("DSJC250.5.txt")
+listFichier_500 = lire_fichier("DSJC500.5.txt")
+listFichier_1000 = lire_fichier("DSJC1000.5.txt")
 
 
-#print(list)
 
+print("Question 2")
+# Trie les objets par poid décroissante
+objectsTrie_125 = sorted(objects_125, key=lambda x: x[1], reverse=True)
+remplissage = FirstFitDecreasingPacking(objectsTrie_125, 150)
 
 # Trie les objets par poid décroissante
-sorted_objects = sorted(objects, key=lambda x: x[1], reverse=True)
+objectsTrie_250 = sorted(objects_250, key=lambda x: x[1], reverse=True)
+remplissage = FirstFitDecreasingPacking(objectsTrie_250, 150)
 
+# Trie les objets par poid décroissante
+objectsTrie_500 = sorted(objects_500, key=lambda x: x[1], reverse=True)
+remplissage = FirstFitDecreasingPacking(objectsTrie_250, 150)
 
+# Trie les objets par poid décroissante
+objectsTrie_1000 = sorted(objects_1000, key=lambda x: x[1], reverse=True)
+remplissage = FirstFitDecreasingPacking(objectsTrie_250, 150)
