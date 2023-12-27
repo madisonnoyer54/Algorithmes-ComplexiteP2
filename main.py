@@ -142,53 +142,120 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
 
 
 ## TESTE 
+
 print("Question 2")
 # Trie les objets par poid décroissante
 objetsTrie_125 = sorted(objets_125, key=lambda x: x[1], reverse=True)
 remplissage = FirstFitDecreasingPacking(objetsTrie_125, 150)
 
+"""
 for boite in remplissage:
     print(boite)
 print()
+"""
 
 # Trie les objets par poid décroissante
 objetsTrie_250 = sorted(objets_250, key=lambda x: x[1], reverse=True)
 remplissage = FirstFitDecreasingPacking(objetsTrie_250, 150)
+"""
 
 for boite in remplissage:
     print(boite)
+
 print()
+
+"""
 
 # Trie les objets par poid décroissante
 objetsTrie_500 = sorted(objets_500, key=lambda x: x[1], reverse=True)
 remplissage = FirstFitDecreasingPacking(objetsTrie_250, 150)
+"""
 
 for boite in remplissage:
     print(boite)
+
 print()
+
+"""
 
 # Trie les objets par poid décroissante
 objetsTrie_1000 = sorted(objets_1000, key=lambda x: x[1], reverse=True)
 remplissage = FirstFitDecreasingPacking(objetsTrie_250, 150)
 
+"""
+
+for boite in remplissage:
+    print(boite)
+
+print()
+
+"""
+
+
+# QUESTION 3
+def BestFitDecreasingPacking(listObjets, tailleBoite):
+    # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
+    boites = []
+
+    for objet in listObjets: 
+        objetIndex, objetH = objet
+        place = False
+
+        # Trie les boîtes par capacité restante croissante ( logique car on l'ajoute a celle avec une + grand capacité )
+        boites.sort(key=lambda x: x[0])
+
+        # Parcourir les boîtes existantes
+        for boite in boites:
+            conflit_present = False
+
+            # Vérifier les conflits avec les objets déjà dans la boîte
+            for couple in boite[1]:
+                if conflit(objetIndex, couple[0], listObjets):
+                    conflit_present = True
+                    break
+
+            # Si pas de conflit et la taille totale ne dépasse pas, placer l'objet dans la boîte
+            if not conflit_present and boite[0] + objetH <= tailleBoite:
+                boite[0] += objetH
+                boite[1].append((objetIndex, objetH))
+                place = True
+                break
+
+        # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
+        if not place:
+            nouvelle_boite = [objetH, [(objetIndex, objetH)]]
+            boites.append(nouvelle_boite)
+
+    return boites
+
+
+
+print("QUESTION 3")
+remplissage = BestFitDecreasingPacking(objetsTrie_125, 150)
+
+
+for boite in remplissage:
+    print(boite)
+
+print()
+
+remplissage = BestFitDecreasingPacking(objetsTrie_250, 150)
+
 for boite in remplissage:
     print(boite)
 
 print()
 
 
-
-
-# QUESTION 3
-def BestFitDecreasingPacking():
-    return 4
-
-
-remplissage = BestFitDecreasingPacking(objetsTrie_125, 150)
-
-remplissage = BestFitDecreasingPacking(objetsTrie_250, 150)
-
 remplissage = BestFitDecreasingPacking(objetsTrie_500, 150)
+for boite in remplissage:
+    print(boite)
+
+print()
 
 remplissage = BestFitDecreasingPacking(objetsTrie_1000, 150)
+for boite in remplissage:
+    print(boite)
+
+print()
 
