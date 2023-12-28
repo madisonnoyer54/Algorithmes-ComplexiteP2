@@ -19,7 +19,6 @@ def lire_fichier(nom_fichier,nb):
             # Vérifier que la ligne commence par 'e'
             if ligne.startswith('e'):
                 try:
-                    
                     decomposeligne = ligne.split(" ")
                     list[int(decomposeligne[1])-1].append(int(decomposeligne[2]))
                 except ValueError:
@@ -28,7 +27,6 @@ def lire_fichier(nom_fichier,nb):
     return list
 
 fichier_125 = lire_fichier("DSJC125.5.txt",125)
-
 fichier_250 = lire_fichier("DSJC250.5.txt",250)
 fichier_500 = lire_fichier("DSJC500.5.txt",500)
 fichier_1000 = lire_fichier("DSJC1000.5.txt",1000)
@@ -222,7 +220,7 @@ print()
 
 
 def BestFitDecreasingPacking(listObjets, tailleBoite):
-    # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
+   # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
     boites = []
 
     for objet in listObjets: 
@@ -231,10 +229,13 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
 
         # Trie les boîtes par capacité restante croissante ( logique car on l'ajoute a celle avec une + grand capacité )
         boites.sort(key=lambda x: x[0])
-
+        
+        i=0
         # Parcourir les boîtes existantes
-        for boite in boites:
+        while i < len(boites) and place != True:
             conflit_present = False
+            
+            boite = boites[i]
 
             # Vérifier les conflits avec les objets déjà dans la boîte
             for couple in boite[1]:
@@ -247,7 +248,10 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
                 boite[0] += objetH
                 boite[1].append((objetIndex, objetH))
                 place = True
+
                 break
+
+            i+=1
 
         # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
         if not place:
@@ -302,7 +306,6 @@ for boite in remplissage:
 print()
 """
 
-print("fini")
 
 """
 ## QUESTION 4
