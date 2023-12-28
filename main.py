@@ -1,4 +1,5 @@
 import random
+import networkx as nx
 import matplotlib.pyplot as plt
 
 
@@ -229,7 +230,7 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
 
         # Trie les boîtes par capacité restante croissante ( logique car on l'ajoute a celle avec une + grand capacité )
         boites.sort(key=lambda x: x[0])
-        
+    
         i=0
         # Parcourir les boîtes existantes
         while i < len(boites) and place != True:
@@ -252,7 +253,6 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
                 break
 
             i+=1
-
         # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
         if not place:
             nouvelle_boite = [objetH, [(objetIndex, objetH)]]
@@ -307,48 +307,72 @@ print()
 """
 
 
-"""
-## QUESTION 4
-def DSatur(graph):
 
-    vertices = list(graph.keys())
-    colored_vertices = {}
+## QUESTION 4
+def Dsatur(graphe):
+    # Initialisation
+    colors = {}
+    remaining_vertices = set(graphe.keys())
+    saturation_degrees = {v: 0 for v in graphe}
 
     # Ordonner les sommets par ordre décroissant de degrés
-    ordered_vertices = sorted(vertices, key=lambda v: len(graph[v]), reverse=True)
+    sorted_vertices = sorted(graphe.keys(), key=lambda x: len(graphe[x]), reverse=True)
 
-    # Identifier le sommet de degré maximal et lui attribuer la couleur 1
-    max_degree_vertex = ordered_vertices[0]
-    colored_vertices[max_degree_vertex] = 1
-    vertices.remove(max_degree_vertex)
+    # Identifier le sommet de degré maximal et l'affecter à la couleur 1
+    v = sorted_vertices[0]
+    colors[v] = 1
+    remaining_vertices.remove(v)
 
-    # Boucle principale
-    while vertices:
-        max_saturation_degree = -1
-        selected_vertex = None
-
-        # Choisir un sommet avec le degré de saturation maximal
-        for vertex in vertices:
-            saturation_degree = len(set(colored_vertices[neighbor] for neighbor in graph[vertex]))
-            
-            # En cas d'égalité, choisir le sommet du degré maximal
-            if saturation_degree > max_saturation_degree or (saturation_degree == max_saturation_degree and len(graph[vertex]) > len(graph[selected_vertex])):
-                max_saturation_degree = saturation_degree
-                selected_vertex = vertex
-
-        # Attribuer la couleur au sommet sélectionné
-        available_colors = set(range(1, max_saturation_degree + 2))
-        for neighbor in graph[selected_vertex]:
-            if neighbor in colored_vertices:
-                available_colors.discard(colored_vertices[neighbor])
+    while remaining_vertices:
+        # Choisir le sommet avec le degré de saturation maximal
+        v = max(remaining_vertices, key=lambda x: (saturation_degrees[x], len(graphe[x])))
 
         # Attribuer à v le numéro de couleur le plus petit possible
-        colored_vertices[selected_vertex] = min(available_colors)
-        vertices.remove(selected_vertex)
+        available_colors = set(range(1, max(colors.values()) + 2))
+        for neighbor in graphe[v]:
+            if neighbor in colors:
+                available_colors.discard(colors[neighbor])
 
-    return colored_vertices
+        color = min(available_colors)
+        colors[v] = color
+        remaining_vertices.remove(v)
+
+        # Mettre à jour les degrés de saturation des voisins
+        for neighbor in graphe[v]:
+            saturation_degrees[neighbor] += 1
+
+    return colors
+
+def afficherGrapheDsatur(fichier):
+    # Crée graphe 
+    j = 1
+    graphe = {}
+    for i in fichier:
+        graphe[j] = i
+        j += 1
 
 
+    #Afficher
+    # Création d'un objet graphe NetworkX
+    G = nx.Graph(graphe)
+
+    # Coloration des sommets en utilisant l'algorithme DSatur
+    colors = Dsatur(graphe)
+
+    # Liste des couleurs attribuées à chaque sommet
+    node_colors = [colors[node] for node in G.nodes]
+
+    # Dessiner le graphe avec NetworkX
+    pos = nx.spring_layout(G)  # Choisir une disposition du graphe
+    nx.draw(G, pos, with_labels=True, node_size=700, node_color=node_colors, cmap=plt.cm.rainbow)
+    plt.show()
+
+# Exemple 
+afficherGrapheDsatur(fichier_125)
+afficherGrapheDsatur(fichier_250)
+afficherGrapheDsatur(fichier_500)
+afficherGrapheDsatur(fichier_1000)
+"""
 def DsaturWithFFDpacking(listObjets, tailleBoite, colorationDsatur):
     # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
     boites = []

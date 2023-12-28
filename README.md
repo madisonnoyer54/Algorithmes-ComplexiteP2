@@ -1,1 +1,3 @@
-# Algorithmes-ComplexiteP1
+# Algorithmes-ComplexiteP2
+
+pip install networkx matplotlib
