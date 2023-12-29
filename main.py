@@ -37,7 +37,7 @@ fichier_1000 = lire_fichier("DSJC1000.5.txt",1000)
 def remplirHauteurs(nb):
     objets = []
     h = 10
-    sommet = 0
+    sommet = 1
 
     quotient = nb // 41
     reste = nb % 41
@@ -74,6 +74,7 @@ def FractionalPacking(listObjets, tailleBoite):
 print("Question 1")
 # Exemple d'utilisation pour 125 
 objets_125 = remplirHauteurs(125)
+
 result = FractionalPacking(objets_125, 150)
 print("Nombre de boîtes utilisées:", result)
 
@@ -221,7 +222,7 @@ print()
 
 
 def BestFitDecreasingPacking(listObjets, tailleBoite):
-   # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
+   # Remplissage : chaque liste represente une boite avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
     boites = []
 
     for objet in listObjets: 
@@ -244,7 +245,7 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
                     conflit_present = True
                     break
 
-            # Si pas de conflit et la taille totale ne dépasse pas
+            # Si pas de conflit et la taille totale ne depasse pas
             if not conflit_present and boite[0] + objetH <= tailleBoite: 
                 boite[0] += objetH
                 boite[1].append((objetIndex, objetH))  
@@ -253,7 +254,7 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
                 break
 
             i+=1
-        # Si pas de place, créer boîte
+        # Si pas de place  cree boite
         if not place:
             nouvelle_boite = [objetH, [(objetIndex, objetH)]]
             boites.append(nouvelle_boite)
@@ -307,7 +308,6 @@ print()
 """
 
 
-
 ## QUESTION 4
 def Dsatur(graphe):
  
@@ -344,6 +344,7 @@ def Dsatur(graphe):
     return couleurs  
 
 
+# Permet de faire un graphe pas rapport au fichier et de l'afficher 
 def afficherGrapheDsatur(fichier):
     # Crée graphe avec le fichier
     j = 1
@@ -353,124 +354,132 @@ def afficherGrapheDsatur(fichier):
         j += 1
 
 
+   # print(graphe)
     # Afficher
     G = nx.Graph(graphe)
     colors = Dsatur(graphe)
+
     node_colors = [colors[node] for node in G.nodes]
     pos = nx.spring_layout(G) 
     nx.draw(G, pos, with_labels=True, node_size=700, node_color=node_colors, cmap=plt.cm.rainbow)
     plt.show()
 
 # Exemple 
-afficherGrapheDsatur(fichier_125)
-afficherGrapheDsatur(fichier_250)
-afficherGrapheDsatur(fichier_500)
-afficherGrapheDsatur(fichier_1000)
+#afficherGrapheDsatur(fichier_125)
+#afficherGrapheDsatur(fichier_250)
+#afficherGrapheDsatur(fichier_500)
+#afficherGrapheDsatur(fichier_1000)
+
+# Permet de mettre le poids sur le graphe color forme obtenu (index,poids,couleur)
+def refaireGrapheAvecPoids(graphe,fichier):
+    listTuple = []
+
+    if len(graphe) == 125:
+        objects = objets_125
+    elif len(graphe) == 250:
+        objects = objets_250
+    elif len(graphe) == 500: 
+        objects = objets_500
+    else:
+        objects = objets_1000
+  
+   
+    for i in objects:
+       j = i[0]
+       listTuple.append((j,i[1],graphe[j]))
+
+
+    return listTuple
+
+
+# Permet de construire un graphe mais sens l'afficher 
+def faireGraphe(fichier):
+    j = 1
+    graphe = {}
+    for i in fichier:
+        graphe[j] = i
+        j += 1
+    colors = Dsatur(graphe)
+
+    return colors 
+
+
+# Les differentes liste 
+grapheColor_125 = refaireGrapheAvecPoids(faireGraphe(fichier_125),fichier_125)
+grapheColor_250 = refaireGrapheAvecPoids(faireGraphe(fichier_250),fichier_250)
+grapheColor_500 = refaireGrapheAvecPoids(faireGraphe(fichier_500),fichier_500)
+grapheColor_1000 = refaireGrapheAvecPoids(faireGraphe(fichier_1000),fichier_1000)
+
 
 """
-def DsaturWithFFDpacking(listObjets, tailleBoite, colorationDsatur):
+# Q5 
+# Commes c'est colorer cette fois on utiliser les couleur pour les conflit 
+def DsaturWithFFDpacking(tailleBoite, listObjets):
     # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
     boites = []
 
-    for objet in listObjets:
-        objetIndex, objetH, couleur = objet
+    for objet in listObjets: 
+   
+        objetIndex, objetColor = objet
         place = False
 
-        # Parcourir les boîtes existantes
-        for boite in boites:
+        i=0
+        # Parcourir boite tanque boite pas trouver
+        while i < len(boites) and place != True:
             conflit_present = False
+            
+            boite = boites[i]
 
-            # Vérifier les conflits avec les objets déjà dans la boîte
+            # Verif les conflits 
             for couple in boite[1]:
-                if conflit(objetIndex, couple[0], listObjets):
+                if couple[1] == objet[1]: 
                     conflit_present = True
                     break
 
-            # Si pas de conflit et la taille totale ne dépasse pas, placer l'objet dans la boîte
-            if not conflit_present and boite[0] + objetH <= tailleBoite:
-                boite[0] += objetH
-                boite[1].append((objetIndex, objetH))
+            # Si pas de conflit et la taille totale ne dépasse pas
+            if not conflit_present and boite[0] + objetColor <= tailleBoite: 
+                boite[0] += objetColor
+                boite[1].append((objetIndex, objetColor))
                 place = True
+
                 break
 
-        # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
+            i+=1
+
+        # Si pas de place, créer boîte
         if not place:
-            nouvelle_boite = [objetH, [(objetIndex, objetH)]]
+            nouvelle_boite = [objetColor, [(objetIndex, objetColor)]] 
             boites.append(nouvelle_boite)
 
     return boites
 
 
-def DsaturWithBFDpacking(listObjets, tailleBoite, colorationDsatur):
-    # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
-    boites = []
-
-    for objet in listObjets:
-        objetIndex, objetH, couleur = objet
-        place = False
-
-        # Parcourir les boîtes existantes
-        for boite in boites:
-            conflit_present = False
-
-            # Vérifier les conflits avec les objets déjà dans la boîte
-            for couple in boite[1]:
-                if conflit(objetIndex, couple[0], listObjets):
-                    conflit_present = True
-                    break
-
-            # Si pas de conflit, calculer la capacité restante après insertion et placer l'objet dans la boîte avec la capacité la plus grande
-            if not conflit_present:
-                capacite_restante = tailleBoite - (boite[0] + objetH)
-                if capacite_restante >= 0:
-                    boite[0] += objetH
-                    boite[1].append((objetIndex, objetH))
-                    place = True
-                    break
-
-        # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
-        if not place:
-            nouvelle_boite = [objetH, [(objetIndex, objetH)]]
-            boites.append(nouvelle_boite)
-
-    return boites
+def grapheCree(fichier):
+    print(len(fichier))
+    if len(fichier) == 125:
+        h = objets_125
+    elif len(fichier) == 250:
+        h = objets_250
+    elif len(fichier) == 500: 
+        h = objets_500
+    else:
+        h = objets_1000
 
 
-# Définir les méthodes
-methods = [FirstFitDecreasingPacking, BestFitDecreasingPacking, DsaturWithFFDpacking, DsaturWithBFDpacking]
+    # Crée graphe avec le fichier
+    j = 0
+    graphe = {}
+    for i in fichier:
+        graphe[h[j]] = i
+        j += 1
 
-# Définir le nombre d'objets
-num_objects = [125, 250, 500, 1000]
+    print(graphe)
+    print("cc")
+    colors = Dsatur(graphe)
+    boites = DsaturWithFFDpacking(150,colors)
+    print(len(boites))
 
-# Stocker les résultats
-results = {method.__name__: [] for method in methods}
-
-# Générer des objets avec des tailles aléatoires
-objects = [(i, random.randint(10, 50)) for i in range(1, max(num_objects) + 1)]
-
-# Appliquer chaque méthode et stocker le nombre de boîtes utilisées
-for method in methods:
-    for n in num_objects:
-        subset_objects = objects[:n]
-        result = method(subset_objects, 150)  # Utiliser la taille de boîte appropriée
-        num_boxes_used = len(result)
-        results[method.__name__].append(num_boxes_used)
-
-# Afficher les résultats
-for method, result_list in results.items():
-    print(f"{method}: {result_list}")
-
-# Générer le graphique de comparaison
-plt.figure(figsize=(10, 6))
-for method, result_list in results.items():
-    plt.plot(num_objects, result_list, label=method)
-
-plt.xlabel("Nombre d'objets")
-plt.ylabel("Nombre de boîtes utilisées")
-plt.legend()
-plt.title("Comparaison des méthodes par rapport à la borne inférieure")
-plt.show()
+grapheCree(fichier_125)
 
 """
-
 exit()
