@@ -85,7 +85,7 @@ print("Nombre de boîtes utilisées:", result)
 # Exemple d'utilisation pour 500
 objets_500 = remplirHauteurs(500)
 result = FractionalPacking(objets_500, 150)
-print("Nombre de boîtes utilisées:", result)
+print("Nombre de boîtes utilisées:", result) 
 
 # Exemple d'utilisation pour 500
 objets_1000 = remplirHauteurs(1000)
@@ -103,7 +103,7 @@ def conflit(sommet1,sommet2,listObjets):
         fichier = fichier_125
     elif len(listObjets) == 250:
         fichier = fichier_250
-    elif len(listObjets) == 500:
+    elif len(listObjets) == 500: 
         fichier = fichier_500
     else:
         fichier = fichier_1000
@@ -129,20 +129,20 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
         place = False
 
         i=0
-        # Parcourir les boîtes existantes
+        # Parcourir boite tanque boite pas trouver
         while i < len(boites) and place != True:
             conflit_present = False
             
             boite = boites[i]
 
-            # Vérifier les conflits avec les objets déjà dans la boîte
+            # Verif les conflits 
             for couple in boite[1]:
-                if conflit(objetIndex, couple[0], listObjets):
+                if conflit(objetIndex, couple[0], listObjets): 
                     conflit_present = True
                     break
 
-            # Si pas de conflit et la taille totale ne dépasse pas, placer l'objet dans la boîte
-            if not conflit_present and boite[0] + objetH <= tailleBoite:
+            # Si pas de conflit et la taille totale ne dépasse pas
+            if not conflit_present and boite[0] + objetH <= tailleBoite: 
                 boite[0] += objetH
                 boite[1].append((objetIndex, objetH))
                 place = True
@@ -151,9 +151,9 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
 
             i+=1
 
-        # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
+        # Si pas de place, créer boîte
         if not place:
-            nouvelle_boite = [objetH, [(objetIndex, objetH)]]
+            nouvelle_boite = [objetH, [(objetIndex, objetH)]] 
             boites.append(nouvelle_boite)
 
     return boites
@@ -163,9 +163,9 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
 ## TESTE 
 
 print("Question 2")
-# Trie les objets par poid décroissante
+# Trie les objets par h décroissante
 objetsTrie_125 = sorted(objets_125, key=lambda x: x[1], reverse=True)
-remplissage = FirstFitDecreasingPacking(objetsTrie_125, 150)
+remplissage = FirstFitDecreasingPacking(objetsTrie_125, 150)  
 print(len(remplissage))
 
 """
@@ -174,8 +174,8 @@ for boite in remplissage:
 print()
 """
 
-# Trie les objets par poid décroissante
-objetsTrie_250 = sorted(objets_250, key=lambda x: x[1], reverse=True)
+# Trie les objets par h décroissante
+objetsTrie_250 = sorted(objets_250, key=lambda x: x[1], reverse=True)  
 remplissage = FirstFitDecreasingPacking(objetsTrie_250, 150)
 
 print(len(remplissage))
@@ -188,9 +188,9 @@ print()
 
 """
 
-# Trie les objets par poid décroissante
+# Trie les objets par h décroissante
 objetsTrie_500 = sorted(objets_500, key=lambda x: x[1], reverse=True)
-remplissage = FirstFitDecreasingPacking(objetsTrie_500, 150)
+remplissage = FirstFitDecreasingPacking(objetsTrie_500, 150)  
 
 print(len(remplissage))
 """
@@ -202,10 +202,10 @@ print()
 
 """
 
-# Trie les objets par poid décroissante
-objetsTrie_1000 = sorted(objets_1000, key=lambda x: x[1], reverse=True)
-remplissage = FirstFitDecreasingPacking(objetsTrie_1000, 150)
-print(len(remplissage))
+# Trie les objets par h décroissante
+objetsTrie_1000 = sorted(objets_1000, key=lambda x: x[1], reverse=True) 
+remplissage = FirstFitDecreasingPacking(objetsTrie_1000, 150)  
+print(len(remplissage)) 
 
 """
 
@@ -225,35 +225,35 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
     boites = []
 
     for objet in listObjets: 
-        objetIndex, objetH = objet
+        objetIndex, objetH = objet 
         place = False
 
-        # Trie les boîtes par capacité restante croissante ( logique car on l'ajoute a celle avec une + grand capacité )
+        # Trie boite en capaciter croissante ( logique car on l'ajoute a celle avec une + grand capacité )
         boites.sort(key=lambda x: x[0])
     
         i=0
-        # Parcourir les boîtes existantes
-        while i < len(boites) and place != True:
+        # Parcour les boite tanque boite pas trouver
+        while i < len(boites) and place != True: 
             conflit_present = False
             
             boite = boites[i]
 
-            # Vérifier les conflits avec les objets déjà dans la boîte
-            for couple in boite[1]:
-                if conflit(objetIndex, couple[0], listObjets):
+            # Verif les conflits 
+            for couple in boite[1]: 
+                if conflit(objetIndex, couple[0], listObjets):  
                     conflit_present = True
                     break
 
-            # Si pas de conflit et la taille totale ne dépasse pas, placer l'objet dans la boîte
-            if not conflit_present and boite[0] + objetH <= tailleBoite:
+            # Si pas de conflit et la taille totale ne dépasse pas
+            if not conflit_present and boite[0] + objetH <= tailleBoite: 
                 boite[0] += objetH
-                boite[1].append((objetIndex, objetH))
+                boite[1].append((objetIndex, objetH))  
                 place = True
 
                 break
 
             i+=1
-        # Si l'objet ne peut pas être placé dans une boîte existante, créer une nouvelle boîte
+        # Si pas de place, créer boîte
         if not place:
             nouvelle_boite = [objetH, [(objetIndex, objetH)]]
             boites.append(nouvelle_boite)
@@ -310,41 +310,42 @@ print()
 
 ## QUESTION 4
 def Dsatur(graphe):
-    # Initialisation
-    colors = {}
-    remaining_vertices = set(graphe.keys())
-    saturation_degrees = {v: 0 for v in graphe}
+ 
+    couleurs = {} 
+    sommetsRestants = set(graphe.keys()) # sommet pas encore colorer 
+    degresSaturation = {v: 0 for v in graphe} 
 
-    # Ordonner les sommets par ordre décroissant de degrés
-    sorted_vertices = sorted(graphe.keys(), key=lambda x: len(graphe[x]), reverse=True)
+    # sommet par ordre decroisse de degrès 
+    sommetsTries = sorted(graphe.keys(), key=lambda x: len(graphe[x]), reverse=True) 
 
-    # Identifier le sommet de degré maximal et l'affecter à la couleur 1
-    v = sorted_vertices[0]
-    colors[v] = 1
-    remaining_vertices.remove(v)
+    # mettre sommet max a 1 
+    sommet = sommetsTries[0]
+    couleurs[sommet] = 1 
+    sommetsRestants.remove(sommet)
 
-    while remaining_vertices:
+    while sommetsRestants:
         # Choisir le sommet avec le degré de saturation maximal
-        v = max(remaining_vertices, key=lambda x: (saturation_degrees[x], len(graphe[x])))
+        sommet = max(sommetsRestants, key=lambda x: (degresSaturation[x], len(graphe[x]))) 
 
-        # Attribuer à v le numéro de couleur le plus petit possible
-        available_colors = set(range(1, max(colors.values()) + 2))
-        for neighbor in graphe[v]:
-            if neighbor in colors:
-                available_colors.discard(colors[neighbor])
+        # Attribuer à sommet le numéro de couleur le plus petit possible
+        couleursDisponibles = set(range(1, max(couleurs.values()) + 2))
+        for voisin in graphe[sommet]:
+            if voisin in couleurs: 
+                couleursDisponibles.discard(couleurs[voisin])
 
-        color = min(available_colors)
-        colors[v] = color
-        remaining_vertices.remove(v)
+        couleur = min(couleursDisponibles)
+        couleurs[sommet] = couleur 
+        sommetsRestants.remove(sommet) 
 
         # Mettre à jour les degrés de saturation des voisins
-        for neighbor in graphe[v]:
-            saturation_degrees[neighbor] += 1
+        for voisin in graphe[sommet]:
+            degresSaturation[voisin] += 1  
 
-    return colors
+    return couleurs  
+
 
 def afficherGrapheDsatur(fichier):
-    # Crée graphe 
+    # Crée graphe avec le fichier
     j = 1
     graphe = {}
     for i in fichier:
@@ -352,18 +353,11 @@ def afficherGrapheDsatur(fichier):
         j += 1
 
 
-    #Afficher
-    # Création d'un objet graphe NetworkX
+    # Afficher
     G = nx.Graph(graphe)
-
-    # Coloration des sommets en utilisant l'algorithme DSatur
     colors = Dsatur(graphe)
-
-    # Liste des couleurs attribuées à chaque sommet
     node_colors = [colors[node] for node in G.nodes]
-
-    # Dessiner le graphe avec NetworkX
-    pos = nx.spring_layout(G)  # Choisir une disposition du graphe
+    pos = nx.spring_layout(G) 
     nx.draw(G, pos, with_labels=True, node_size=700, node_color=node_colors, cmap=plt.cm.rainbow)
     plt.show()
 
@@ -372,6 +366,7 @@ afficherGrapheDsatur(fichier_125)
 afficherGrapheDsatur(fichier_250)
 afficherGrapheDsatur(fichier_500)
 afficherGrapheDsatur(fichier_1000)
+
 """
 def DsaturWithFFDpacking(listObjets, tailleBoite, colorationDsatur):
     # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
