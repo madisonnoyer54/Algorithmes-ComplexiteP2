@@ -77,27 +77,27 @@ def FractionalPacking(listObjets, tailleBoite):
 
 
 ## TESTE
-print("Question 1")
+#print("Question 1")
 # Exemple d'utilisation pour 125 
 objets_125 = remplirHauteurs(125)
 
-result = FractionalPacking(objets_125, 150)
-print("Borne inférieure pour 125:", result)
+remplissageQ1_125 = FractionalPacking(objets_125, 150)
+#print("Borne inférieure pour 125:", remplissageQ1_125)
 
 # Exemple d'utilisation pour 250
 objets_250 = remplirHauteurs(250)
-result = FractionalPacking(objets_250, 150)
-print("Borne inférieure pour 250:", result)
+remplissageQ1_250 = FractionalPacking(objets_250, 150)
+#print("Borne inférieure pour 250:", remplissageQ1_250)
 
 # Exemple d'utilisation pour 500
 objets_500 = remplirHauteurs(500)
-result = FractionalPacking(objets_500, 150)
-print("Borne inférieure pour 500:", result)
+remplissageQ1_500 = FractionalPacking(objets_500, 150)
+#print("Borne inférieure pour 500:", remplissageQ1_500)
 
 # Exemple d'utilisation pour 500
 objets_1000 = remplirHauteurs(1000)
-result = FractionalPacking(objets_1000, 150)
-print("Borne inférieure pour 1000:", result)
+remplissageQ1_1000 = FractionalPacking(objets_1000, 150)
+#print("Borne inférieure pour 1000:", remplissageQ1_1000)
 
 
 
@@ -168,31 +168,31 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
 
 
 ## TESTE 
-print()
-print("Question 2")
+#print()
+#print("Question 2")
 # Trie les objets par h décroissante
 objetsTrie_125 = sorted(objets_125, key=lambda x: x[1], reverse=True)
-remplissage = FirstFitDecreasingPacking(objetsTrie_125, 150)  
-print("nombre de paquet utiliser pour 125:",len(remplissage))
+remplissageQ2_125 = FirstFitDecreasingPacking(objetsTrie_125, 150)  
+#print("nombre de paquet utiliser pour 125:",len(remplissageQ2_125))
 #afficheDetailBoite(remplissage)
 
 # Trie les objets par h décroissante
 objetsTrie_250 = sorted(objets_250, key=lambda x: x[1], reverse=True)  
-remplissage = FirstFitDecreasingPacking(objetsTrie_250, 150)
-print("nombre de paquet utiliser pour 250:",len(remplissage))
+remplissageQ2_250 = FirstFitDecreasingPacking(objetsTrie_250, 150)
+#print("nombre de paquet utiliser pour 250:",len(remplissageQ2_250))
 #afficheDetailBoite(remplissage)
 
 
 # Trie les objets par h décroissante
 objetsTrie_500 = sorted(objets_500, key=lambda x: x[1], reverse=True)
-remplissage = FirstFitDecreasingPacking(objetsTrie_500, 150)  
-print("nombre de paquet utiliser pour 500:",len(remplissage))
+remplissageQ2_500 = FirstFitDecreasingPacking(objetsTrie_500, 150)  
+#print("nombre de paquet utiliser pour 500:",len(remplissageQ2_500))
 #afficheDetailBoite(remplissage)
 
 # Trie les objets par h décroissante
 objetsTrie_1000 = sorted(objets_1000, key=lambda x: x[1], reverse=True) 
-remplissage = FirstFitDecreasingPacking(objetsTrie_1000, 150)  
-print("nombre de paquet utiliser pour 1000:",len(remplissage))
+remplissageQ2_1000 = FirstFitDecreasingPacking(objetsTrie_1000, 150)  
+#print("nombre de paquet utiliser pour 1000:",len(remplissageQ2_1000))
 #afficheDetailBoite(remplissage)
 
 
@@ -239,26 +239,26 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
     return boites
 
 
-print()
-print("QUESTION 3")
-remplissage = BestFitDecreasingPacking(objetsTrie_125, 150)
-print("nombre de paquet utiliser pour 125:",len(remplissage))
+#print()
+#print("QUESTION 3")
+remplissageQ3_125 = BestFitDecreasingPacking(objetsTrie_125, 150)
+#print("nombre de paquet utiliser pour 125:",len(remplissageQ3_125))
 #afficheDetailBoite(remplissage)
 
-remplissage = BestFitDecreasingPacking(objetsTrie_250, 150)
-print("nombre de paquet utiliser pour 250:",len(remplissage))
-#afficheDetailBoite(remplissage)
-
-
-
-remplissage = BestFitDecreasingPacking(objetsTrie_500, 150)
-print("nombre de paquet utiliser pour 500:",len(remplissage))
+remplissageQ3_250 = BestFitDecreasingPacking(objetsTrie_250, 150)
+#print("nombre de paquet utiliser pour 250:",len(remplissageQ3_250))
 #afficheDetailBoite(remplissage)
 
 
 
-remplissage = BestFitDecreasingPacking(objetsTrie_1000, 150)
-print("nombre de paquet utiliser pour 1000:",len(remplissage))
+remplissageQ3_500 = BestFitDecreasingPacking(objetsTrie_500, 150)
+#print("nombre de paquet utiliser pour 500:",len(remplissageQ3_500))
+#afficheDetailBoite(remplissage)
+
+
+
+remplissageQ3_1000 = BestFitDecreasingPacking(objetsTrie_1000, 150)
+#print("nombre de paquet utiliser pour 1000:",len(remplissageQ3_1000))
 #afficheDetailBoite(remplissage)
 
 
@@ -401,22 +401,22 @@ def DsaturWithFFDpacking(listObjets, tailleBoite):
 
     return boites
 
-print()
-print("QUESTION 5")
-remplissage = DsaturWithFFDpacking(grapheColor_125,150)
-print("nombre de paquet utiliser pour 125:",len(remplissage))
+#print()
+#print("QUESTION 5")
+remplissageQ5_125 = DsaturWithFFDpacking(grapheColor_125,150)
+#print("nombre de paquet utiliser pour 125:",len(remplissageQ5_125))
 #afficheDetailBoite(remplissage)
 
-remplissage = DsaturWithFFDpacking(grapheColor_250,150)
-print("nombre de paquet utiliser pour 250:",len(remplissage))
+remplissageQ5_250 = DsaturWithFFDpacking(grapheColor_250,150)
+#print("nombre de paquet utiliser pour 250:",len(remplissageQ5_250))
 #afficheDetailBoite(remplissage)
 
-remplissage = DsaturWithFFDpacking(grapheColor_500,150)
-print("nombre de paquet utiliser pour 500:",len(remplissage))
+remplissageQ5_500 = DsaturWithFFDpacking(grapheColor_500,150)
+#print("nombre de paquet utiliser pour 500:",len(remplissageQ5_500))
 #afficheDetailBoite(remplissage)
 
-remplissage = DsaturWithFFDpacking(grapheColor_1000,150)
-print("nombre de paquet utiliser pour 1000:",len(remplissage))
+remplissageQ5_1000 = DsaturWithFFDpacking(grapheColor_1000,150)
+#print("nombre de paquet utiliser pour 1000:",len(remplissageQ5_1000))
 #afficheDetailBoite(remplissage)
 
 
@@ -461,27 +461,73 @@ def DsaturWithBFDpacking(listObjets, tailleBoite):
 
     return boites
 
-print()
-print("QUESTION 6")
-remplissage = DsaturWithBFDpacking(grapheColor_125,150)
-print("nombre de paquet utiliser pour 125:",len(remplissage))
+#print()
+#print("QUESTION 6")
+remplissageQ6_125 = DsaturWithBFDpacking(grapheColor_125,150)
+#print("nombre de paquet utiliser pour 125:",len(remplissageQ6_125))
 #afficheDetailBoite(remplissage)
 
-remplissage = DsaturWithBFDpacking(grapheColor_250,150)
-print("nombre de paquet utiliser pour 250:",len(remplissage))
+remplissageQ6_250 = DsaturWithBFDpacking(grapheColor_250,150)
+#print("nombre de paquet utiliser pour 250:",len(remplissageQ6_250))
 #afficheDetailBoite(remplissage)
 
-remplissage = DsaturWithBFDpacking(grapheColor_500,150)
-print("nombre de paquet utiliser pour 500:",len(remplissage))
+remplissageQ6_500 = DsaturWithBFDpacking(grapheColor_500,150)
+#print("nombre de paquet utiliser pour 500:",len(remplissageQ6_500))
 #afficheDetailBoite(remplissage)
 
-remplissage = DsaturWithBFDpacking(grapheColor_1000,150)
-print("nombre de paquet utiliser pour 1000:",len(remplissage))
+remplissageQ6_1000 = DsaturWithBFDpacking(grapheColor_1000,150)
+#print("nombre de paquet utiliser pour 1000:",len(remplissageQ6_1000))
 #afficheDetailBoite(remplissage)
-
-
 
 
 ## QUESTION 7
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+categories = ['125', '250', '500', '1000']
+nombre_objets = [125, 250, 500, 1000]
+
+# Borne inf
+Q1 = [remplissageQ1_125, remplissageQ1_250, remplissageQ1_500, remplissageQ1_1000]
+# FirstFitDecreasingPacking
+Q2 = [len(remplissageQ2_125), len(remplissageQ2_250), len(remplissageQ2_500), len(remplissageQ2_1000)]
+# BestFitDecreasingPacking 
+Q3 = [len(remplissageQ3_125), len(remplissageQ3_250), len(remplissageQ3_500), len(remplissageQ3_1000)]
+# DsaturWithFFDpacking
+Q5 = [len(remplissageQ5_125), len(remplissageQ5_250), len(remplissageQ5_500), len(remplissageQ5_1000)]
+# DsaturWithBFDpacking
+Q6 = [len(remplissageQ6_125), len(remplissageQ6_250), len(remplissageQ6_500), len(remplissageQ6_1000)]
+
+#### TABLEAU 
+# Affichage du tableau
+print("| {:<15} | {:<25} | {:<25} | {:<25} | {:<25} | {:<25} | ".format("Nombre d'objets", "Borne inférieur", "FirstFitDecreasingPacking", "BestFitDecreasingPacking", "DsaturWithFFDpacking", "DsaturWithBFDpacking"))
+print("|" + "-"*17 + "|" + "-"*27 + "|" + "-"*27 + "|" + "-"*27 + "|" + "-"*27 + "|" + "-"*27 + "|")
+
+for i in range(len(nombre_objets)):
+    print("| {:<15} | {:<25} | {:<25} | {:<25} | {:<25} | {:<25} |".format(nombre_objets[i], Q1[i], Q2[i], Q3[i], Q5[i], Q6[i]))
+
+### GRAPHE 
+bar_width = 0.15  # Largeur des barres
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+bar_positions = np.arange(len(categories))
+
+ax.bar(bar_positions - 2*bar_width, Q1, width=bar_width, label='Borne inférieure', color='yellow')
+ax.bar(bar_positions - bar_width, Q2, width=bar_width, label='FirstFitDecreasingPacking', color='orange')
+ax.bar(bar_positions, Q3, width=bar_width, label='BestFitDecreasingPacking', color='blue')
+ax.bar(bar_positions + bar_width, Q5, width=bar_width, label='DsaturWithFFDpacking', color='green')
+ax.bar(bar_positions + 2*bar_width, Q6, width=bar_width, label='DsaturWithBFDpacking', color='red')
+
+ax.set_xticks(bar_positions)
+ax.set_xticklabels(categories)
+ax.set_xlabel('nombre d\'objets (125, 250, 500, 1000)')
+ax.set_ylabel('Nombre de paquet')
+ax.set_title('Comparaison entre les méthodes')
+ax.legend()
+
+plt.show()
+
 
 exit()

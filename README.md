@@ -5,4 +5,5 @@ pip install networkx matplotlib
 pip install scipy
 sudo apt-get install python3-pip
 
-Chaque graphe ce lance 
+pip install tk
+sudo apt-get install python3-tk
