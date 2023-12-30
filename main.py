@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 
 # On considère la capacité de chaque bin H = 150 dans tout le code 
 
+# Fonction qui permet d'afficher le detail des boites 
+def afficheDetailBoite(remplissage):
+    for boite in remplissage:
+        print(boite)
+    print()
 
 # LECTURE FICHIER 
 def lire_fichier(nom_fichier,nb):
@@ -31,6 +36,7 @@ fichier_125 = lire_fichier("DSJC125.5.txt",125)
 fichier_250 = lire_fichier("DSJC250.5.txt",250)
 fichier_500 = lire_fichier("DSJC500.5.txt",500)
 fichier_1000 = lire_fichier("DSJC1000.5.txt",1000)
+test = lire_fichier("test1.txt",10)
 
 
 # REMPLIR LES HAUTEURS
@@ -76,26 +82,26 @@ print("Question 1")
 objets_125 = remplirHauteurs(125)
 
 result = FractionalPacking(objets_125, 150)
-print("Nombre de boîtes utilisées:", result)
+print("Borne inférieure pour 125:", result)
 
 # Exemple d'utilisation pour 250
 objets_250 = remplirHauteurs(250)
 result = FractionalPacking(objets_250, 150)
-print("Nombre de boîtes utilisées:", result)
+print("Borne inférieure pour 250:", result)
 
 # Exemple d'utilisation pour 500
 objets_500 = remplirHauteurs(500)
 result = FractionalPacking(objets_500, 150)
-print("Nombre de boîtes utilisées:", result) 
+print("Borne inférieure pour 500:", result)
 
 # Exemple d'utilisation pour 500
 objets_1000 = remplirHauteurs(1000)
 result = FractionalPacking(objets_1000, 150)
-print("Nombre de boîtes utilisées:", result)
+print("Borne inférieure pour 1000:", result)
 
 
 
-# Q2
+# QUESTION 2
 # Fonction qui permet de gerer les conflit entre 2 sommet par rapport au fichier donner
 def conflit(sommet1,sommet2,listObjets):
     confli = False 
@@ -162,65 +168,36 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
 
 
 ## TESTE 
-
+print()
 print("Question 2")
 # Trie les objets par h décroissante
 objetsTrie_125 = sorted(objets_125, key=lambda x: x[1], reverse=True)
 remplissage = FirstFitDecreasingPacking(objetsTrie_125, 150)  
-print(len(remplissage))
-
-"""
-for boite in remplissage:
-    print(boite)
-print()
-"""
+print("nombre de paquet utiliser pour 125:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
 # Trie les objets par h décroissante
 objetsTrie_250 = sorted(objets_250, key=lambda x: x[1], reverse=True)  
 remplissage = FirstFitDecreasingPacking(objetsTrie_250, 150)
+print("nombre de paquet utiliser pour 250:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
-print(len(remplissage))
-"""
-
-for boite in remplissage:
-    print(boite)
-
-print()
-
-"""
 
 # Trie les objets par h décroissante
 objetsTrie_500 = sorted(objets_500, key=lambda x: x[1], reverse=True)
 remplissage = FirstFitDecreasingPacking(objetsTrie_500, 150)  
-
-print(len(remplissage))
-"""
-
-for boite in remplissage:
-    print(boite)
-
-print()
-
-"""
+print("nombre de paquet utiliser pour 500:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
 # Trie les objets par h décroissante
 objetsTrie_1000 = sorted(objets_1000, key=lambda x: x[1], reverse=True) 
 remplissage = FirstFitDecreasingPacking(objetsTrie_1000, 150)  
-print(len(remplissage)) 
+print("nombre de paquet utiliser pour 1000:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
-"""
-
-for boite in remplissage:
-    print(boite)
-
-print()
-
-"""
 
 
 # QUESTION 3
-
-
 def BestFitDecreasingPacking(listObjets, tailleBoite):
    # Remplissage : chaque liste represente une boite avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
     boites = []
@@ -262,86 +239,58 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
     return boites
 
 
-
+print()
 print("QUESTION 3")
 remplissage = BestFitDecreasingPacking(objetsTrie_125, 150)
-print(len(remplissage))
-"""
-print(len(remplissage))
-
-for boite in remplissage:
-    print(boite)
-
-print()
-"""
+print("nombre de paquet utiliser pour 125:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
 remplissage = BestFitDecreasingPacking(objetsTrie_250, 150)
-print(len(remplissage))
-"""
-print(len(remplissage))
-for boite in remplissage:
-    print(boite)
+print("nombre de paquet utiliser pour 250:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
-print()
-"""
 
 
 remplissage = BestFitDecreasingPacking(objetsTrie_500, 150)
-print(len(remplissage))
-"""
-print(len(remplissage))
-for boite in remplissage:
-    print(boite)
+print("nombre de paquet utiliser pour 500:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
-print()
-"""
 
 
 remplissage = BestFitDecreasingPacking(objetsTrie_1000, 150)
+print("nombre de paquet utiliser pour 1000:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
-print(len(remplissage))
-"""
-for boite in remplissage:
-    print(boite)
-
-print()
-"""
 
 
 ## QUESTION 4
 def Dsatur(graphe):
- 
-    couleurs = {} 
-    sommetsRestants = set(graphe.keys()) # sommet pas encore colorer 
-    degresSaturation = {v: 0 for v in graphe} 
+    couleurs = {}
+    sommetsRestants = set(graphe.keys())
+    degresSaturation = {v: 0 for v in graphe}
 
-    # sommet par ordre decroisse de degrès 
-    sommetsTries = sorted(graphe.keys(), key=lambda x: len(graphe[x]), reverse=True) 
+    sommetsTries = sorted(graphe.keys(), key=lambda x: len(graphe[x]), reverse=True)
 
-    # mettre sommet max a 1 
     sommet = sommetsTries[0]
-    couleurs[sommet] = 1 
+    couleurs[sommet] = 1
     sommetsRestants.remove(sommet)
 
     while sommetsRestants:
-        # Choisir le sommet avec le degré de saturation maximal
-        sommet = max(sommetsRestants, key=lambda x: (degresSaturation[x], len(graphe[x]))) 
+        sommet = max(sommetsRestants, key=lambda x: (degresSaturation[x], len(graphe[x])))
 
-        # Attribuer à sommet le numéro de couleur le plus petit possible
         couleursDisponibles = set(range(1, max(couleurs.values()) + 2))
         for voisin in graphe[sommet]:
-            if voisin in couleurs: 
+            if voisin in couleurs and couleurs[voisin] != 0:
                 couleursDisponibles.discard(couleurs[voisin])
 
         couleur = min(couleursDisponibles)
-        couleurs[sommet] = couleur 
-        sommetsRestants.remove(sommet) 
+        couleurs[sommet] = couleur
+        sommetsRestants.remove(sommet)
 
-        # Mettre à jour les degrés de saturation des voisins
         for voisin in graphe[sommet]:
-            degresSaturation[voisin] += 1  
+            degresSaturation[voisin] += 1
 
-    return couleurs  
+    return couleurs
 
 
 # Permet de faire un graphe pas rapport au fichier et de l'afficher 
@@ -358,7 +307,6 @@ def afficherGrapheDsatur(fichier):
     # Afficher
     G = nx.Graph(graphe)
     colors = Dsatur(graphe)
-
     node_colors = [colors[node] for node in G.nodes]
     pos = nx.spring_layout(G) 
     nx.draw(G, pos, with_labels=True, node_size=700, node_color=node_colors, cmap=plt.cm.rainbow)
@@ -369,6 +317,7 @@ def afficherGrapheDsatur(fichier):
 #afficherGrapheDsatur(fichier_250)
 #afficherGrapheDsatur(fichier_500)
 #afficherGrapheDsatur(fichier_1000)
+#afficherGrapheDsatur(test)
 
 # Permet de mettre le poids sur le graphe color forme obtenu (index,poids,couleur)
 def refaireGrapheAvecPoids(graphe,fichier):
@@ -404,23 +353,22 @@ def faireGraphe(fichier):
     return colors 
 
 
-# Les differentes liste 
+# Les differentes liste avec les coloration 
 grapheColor_125 = refaireGrapheAvecPoids(faireGraphe(fichier_125),fichier_125)
 grapheColor_250 = refaireGrapheAvecPoids(faireGraphe(fichier_250),fichier_250)
 grapheColor_500 = refaireGrapheAvecPoids(faireGraphe(fichier_500),fichier_500)
 grapheColor_1000 = refaireGrapheAvecPoids(faireGraphe(fichier_1000),fichier_1000)
+#grapheColor_10 = refaireGrapheAvecPoids(faireGraphe(test),test)
 
 
-"""
-# Q5 
-# Commes c'est colorer cette fois on utiliser les couleur pour les conflit 
-def DsaturWithFFDpacking(tailleBoite, listObjets):
+
+## QUESTION 5 
+def DsaturWithFFDpacking(listObjets, tailleBoite):
     # Remplissage : chaque liste représente une boîte avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
     boites = []
 
     for objet in listObjets: 
-   
-        objetIndex, objetColor = objet
+        objetIndex, objetH, objetC = objet
         place = False
 
         i=0
@@ -432,14 +380,14 @@ def DsaturWithFFDpacking(tailleBoite, listObjets):
 
             # Verif les conflits 
             for couple in boite[1]:
-                if couple[1] == objet[1]: 
+                if objetC == couple[2]: 
                     conflit_present = True
                     break
 
             # Si pas de conflit et la taille totale ne dépasse pas
-            if not conflit_present and boite[0] + objetColor <= tailleBoite: 
-                boite[0] += objetColor
-                boite[1].append((objetIndex, objetColor))
+            if not conflit_present and boite[0] + objetH <= tailleBoite: 
+                boite[0] += objetH
+                boite[1].append((objetIndex, objetH,objetC))
                 place = True
 
                 break
@@ -448,38 +396,92 @@ def DsaturWithFFDpacking(tailleBoite, listObjets):
 
         # Si pas de place, créer boîte
         if not place:
-            nouvelle_boite = [objetColor, [(objetIndex, objetColor)]] 
+            nouvelle_boite = [objetH, [(objetIndex, objetH,objetC)]] 
             boites.append(nouvelle_boite)
 
     return boites
 
+print()
+print("QUESTION 5")
+remplissage = DsaturWithFFDpacking(grapheColor_125,150)
+print("nombre de paquet utiliser pour 125:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
-def grapheCree(fichier):
-    print(len(fichier))
-    if len(fichier) == 125:
-        h = objets_125
-    elif len(fichier) == 250:
-        h = objets_250
-    elif len(fichier) == 500: 
-        h = objets_500
-    else:
-        h = objets_1000
+remplissage = DsaturWithFFDpacking(grapheColor_250,150)
+print("nombre de paquet utiliser pour 250:",len(remplissage))
+#afficheDetailBoite(remplissage)
+
+remplissage = DsaturWithFFDpacking(grapheColor_500,150)
+print("nombre de paquet utiliser pour 500:",len(remplissage))
+#afficheDetailBoite(remplissage)
+
+remplissage = DsaturWithFFDpacking(grapheColor_1000,150)
+print("nombre de paquet utiliser pour 1000:",len(remplissage))
+#afficheDetailBoite(remplissage)
 
 
-    # Crée graphe avec le fichier
-    j = 0
-    graphe = {}
-    for i in fichier:
-        graphe[h[j]] = i
-        j += 1
+## QUESTION 6 
+def DsaturWithBFDpacking(listObjets, tailleBoite):
+   # Remplissage : chaque liste represente une boite avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
+    boites = []
 
-    print(graphe)
-    print("cc")
-    colors = Dsatur(graphe)
-    boites = DsaturWithFFDpacking(150,colors)
-    print(len(boites))
+    for objet in listObjets: 
+        objetIndex, objetH, objetC = objet 
+        place = False
 
-grapheCree(fichier_125)
+        # Trie boite en capaciter croissante ( logique car on l'ajoute a celle avec une + grand capacité )
+        boites.sort(key=lambda x: x[0])
+    
+        i=0
+        # Parcour les boite tanque boite pas trouver
+        while i < len(boites) and place != True: 
+            conflit_present = False
+            
+            boite = boites[i]
 
-"""
+            # Verif les conflits 
+            for couple in boite[1]: 
+                if objetC == couple[2]:  
+                    conflit_present = True
+                    break
+
+            # Si pas de conflit et la taille totale ne depasse pas
+            if not conflit_present and boite[0] + objetH <= tailleBoite: 
+                boite[0] += objetH
+                boite[1].append((objetIndex, objetH,objetC))  
+                place = True
+
+                break
+
+            i+=1
+        # Si pas de place  cree boite
+        if not place:
+            nouvelle_boite = [objetH, [(objetIndex, objetH,objetC)]]
+            boites.append(nouvelle_boite)
+
+    return boites
+
+print()
+print("QUESTION 6")
+remplissage = DsaturWithBFDpacking(grapheColor_125,150)
+print("nombre de paquet utiliser pour 125:",len(remplissage))
+#afficheDetailBoite(remplissage)
+
+remplissage = DsaturWithBFDpacking(grapheColor_250,150)
+print("nombre de paquet utiliser pour 250:",len(remplissage))
+#afficheDetailBoite(remplissage)
+
+remplissage = DsaturWithBFDpacking(grapheColor_500,150)
+print("nombre de paquet utiliser pour 500:",len(remplissage))
+#afficheDetailBoite(remplissage)
+
+remplissage = DsaturWithBFDpacking(grapheColor_1000,150)
+print("nombre de paquet utiliser pour 1000:",len(remplissage))
+#afficheDetailBoite(remplissage)
+
+
+
+
+## QUESTION 7
+
 exit()
