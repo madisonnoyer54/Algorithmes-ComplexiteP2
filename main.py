@@ -195,8 +195,6 @@ remplissageQ2_1000 = FirstFitDecreasingPacking(objetsTrie_1000, 150)
 #print("nombre de paquet utiliser pour 1000:",len(remplissageQ2_1000))
 #afficheDetailBoite(remplissage)
 
-
-
 # QUESTION 3
 def BestFitDecreasingPacking(listObjets, tailleBoite):
    # Remplissage : chaque liste represente une boite avec [taille occupée, liste des couples (indice, taille) des objets dans la boîte]
@@ -262,7 +260,6 @@ remplissageQ3_1000 = BestFitDecreasingPacking(objetsTrie_1000, 150)
 #afficheDetailBoite(remplissage)
 
 
-
 ## QUESTION 4
 
 def conflitGraphe(sommet, graph):
@@ -325,7 +322,7 @@ def Dsatur(graph):
  
     # Revenir a 3
     while len(C) != len(graph):
-        print(C)
+     
         # Couleur dispo sommet
         for i in range(couleurMax):
             couleurDispo.add(i)
@@ -333,7 +330,6 @@ def Dsatur(graph):
 
         # Etape 3 
         v = degresMaxColor(C,U,graph)
-      
 
         # Etape 4 
         # Trouver sa couleur
