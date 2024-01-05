@@ -1,10 +1,11 @@
 import random
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
+
 print("Le programme peu mettre plusieurs minute du à la coloration des graphes")
 
 # On considère la capacité de chaque bin H = 150 dans tout le code 
-
 # Fonction qui permet d'afficher le detail des boites 
 def afficheDetailBoite(remplissage):
     for boite in remplissage:
@@ -168,8 +169,6 @@ def FirstFitDecreasingPacking(listObjets, tailleBoite):
 
 
 ## TESTE 
-#print()
-#print("Question 2")
 # Trie les objets par h décroissante
 objetsTrie_125 = sorted(objets_125, key=lambda x: x[1], reverse=True)
 remplissageQ2_125 = FirstFitDecreasingPacking(objetsTrie_125, 150)  
@@ -237,8 +236,7 @@ def BestFitDecreasingPacking(listObjets, tailleBoite):
     return boites
 
 
-#print()
-#print("QUESTION 3")
+## TEST
 remplissageQ3_125 = BestFitDecreasingPacking(objetsTrie_125, 150)
 #print("nombre de paquet utiliser pour 125:",len(remplissageQ3_125))
 #afficheDetailBoite(remplissage)
@@ -353,7 +351,6 @@ def Dsatur(graph):
    
         U.remove(v)
 
-
     return C
 
 
@@ -377,15 +374,15 @@ def afficherGrapheDsatur(fichier):
     nx.draw(G, pos, with_labels=True, node_size=700, node_color=node_colors, cmap=plt.cm.rainbow)
     plt.show()
 
-# Exemple 
+# TEXTE
 #afficherGrapheDsatur(fichier_125)
 #afficherGrapheDsatur(fichier_250)
 #afficherGrapheDsatur(fichier_500)
 #afficherGrapheDsatur(fichier_1000)
 #afficherGrapheDsatur(test)
 
-# Permet de mettre le poids sur le graphe color forme obtenu (index,poids,couleur)
-def refaireGrapheAvecPoids(graphe,fichier):
+# Permet de mettre le poids sur le graphe color forme obtenu (index,hauteur,couleur)
+def refaireGrapheAvecHauteur(graphe):
     listTuple = []
 
     if len(graphe) == 125:
@@ -419,11 +416,10 @@ def faireGraphe(fichier):
 
 
 # Les differentes liste avec les coloration 
-grapheColor_125 = refaireGrapheAvecPoids(faireGraphe(fichier_125),fichier_125)
-grapheColor_250 = refaireGrapheAvecPoids(faireGraphe(fichier_250),fichier_250)
-grapheColor_500 = refaireGrapheAvecPoids(faireGraphe(fichier_500),fichier_500)
-grapheColor_1000 = refaireGrapheAvecPoids(faireGraphe(fichier_1000),fichier_1000)
-#grapheColor_10 = refaireGrapheAvecPoids(faireGraphe(test),test)
+grapheColor_125 = refaireGrapheAvecHauteur(faireGraphe(fichier_125))
+grapheColor_250 = refaireGrapheAvecHauteur(faireGraphe(fichier_250))
+grapheColor_500 = refaireGrapheAvecHauteur(faireGraphe(fichier_500))
+grapheColor_1000 = refaireGrapheAvecHauteur(faireGraphe(fichier_1000))
 
 
 
@@ -466,8 +462,7 @@ def DsaturWithFFDpacking(listObjets, tailleBoite):
 
     return boites
 
-#print()
-#print("QUESTION 5")
+## TESTE
 remplissageQ5_125 = DsaturWithFFDpacking(grapheColor_125,150)
 #print("nombre de paquet utiliser pour 125:",len(remplissageQ5_125))
 #afficheDetailBoite(remplissage)
@@ -526,8 +521,7 @@ def DsaturWithBFDpacking(listObjets, tailleBoite):
 
     return boites
 
-#print()
-#print("QUESTION 6")
+## TESTE
 remplissageQ6_125 = DsaturWithBFDpacking(grapheColor_125,150)
 #print("nombre de paquet utiliser pour 125:",len(remplissageQ6_125))
 #afficheDetailBoite(remplissage)
@@ -546,9 +540,6 @@ remplissageQ6_1000 = DsaturWithBFDpacking(grapheColor_1000,150)
 
 
 ## QUESTION 7
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 categories = ['125', '250', '500', '1000']
 nombre_objets = [125, 250, 500, 1000]
