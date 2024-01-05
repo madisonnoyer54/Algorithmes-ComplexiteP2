@@ -1,7 +1,7 @@
 import random
 import networkx as nx
 import matplotlib.pyplot as plt
-
+print("Le programme peu mettre plusieurs minute du à la coloration des graphes")
 
 # On considère la capacité de chaque bin H = 150 dans tout le code 
 
@@ -264,33 +264,102 @@ remplissageQ3_1000 = BestFitDecreasingPacking(objetsTrie_1000, 150)
 
 
 ## QUESTION 4
-def Dsatur(graphe):
-    couleurs = {}
-    sommetsRestants = set(graphe.keys())
-    degresSaturation = {v: 0 for v in graphe}
 
-    sommetsTries = sorted(graphe.keys(), key=lambda x: len(graphe[x]), reverse=True)
+def conflitGraphe(sommet, graph):
+    liste = set(graph[sommet])
 
-    sommet = sommetsTries[0]
-    couleurs[sommet] = 1
-    sommetsRestants.remove(sommet)
+    for i in graph:
+        for j in graph[i]:
+            if j == sommet:
+                liste.add(i)
 
-    while sommetsRestants:
-        sommet = max(sommetsRestants, key=lambda x: (degresSaturation[x], len(graphe[x])))
+    return list(liste)
 
-        couleursDisponibles = set(range(1, max(couleurs.values()) + 2))
-        for voisin in graphe[sommet]:
-            if voisin in couleurs and couleurs[voisin] != 0:
-                couleursDisponibles.discard(couleurs[voisin])
 
-        couleur = min(couleursDisponibles)
-        couleurs[sommet] = couleur
-        sommetsRestants.remove(sommet)
+def degresMaxColor(C,U,graph):
+    conflitSup = U[0]
+    compteMaxColor =0
+    compteColor =0
 
-        for voisin in graphe[sommet]:
-            degresSaturation[voisin] += 1
+    for j in U:
+        conflitAvec = conflitGraphe(j,graph)
+        for i in conflitAvec:
+            if i in C:
+                compteColor +=1
+        
+        # Si egale choisir degres max 
+        if(compteColor == compteMaxColor):
+            if(len(graph[j])>len(graph[conflitSup]) ):
+                conflitSup = j
 
-    return couleurs
+        # Prend le conflit conlorier sup
+        if( compteColor > compteMaxColor):
+            compteMaxColor = compteColor
+            conflitSup = j
+
+
+    return conflitSup
+
+
+
+
+def Dsatur(graph):
+    print("Commencement de la coloration du graphe: ",len(graph))
+    #print("graphe ")
+    couleurMax =0 # Couleur max possible
+    couleurDispo ={0}
+    # Etape 1
+    # Initialisation
+    U = set(graph.keys())  # Ensemble des sommets du graphe
+
+    C = {}  # Ensemnble des sommet colorés 
+
+    # Ordonner les sommets par ordre décroissant de degrés
+    U = sorted(graph, key=lambda x: len(graph[x]), reverse=True)
+
+    # Etape 2 
+    v = U[0]
+    C[v] = couleurMax
+    U.remove(v)
+   
+ 
+    # Revenir a 3
+    while len(C) != len(graph):
+        print(C)
+        # Couleur dispo sommet
+        for i in range(couleurMax):
+            couleurDispo.add(i)
+            
+
+        # Etape 3 
+        v = degresMaxColor(C,U,graph)
+      
+
+        # Etape 4 
+        # Trouver sa couleur
+        conflitAvec = conflitGraphe(v,graph)
+
+        # On deroule les sommet avec les conflit de v 
+        for i in conflitAvec:
+            if i in C and C[i] in couleurDispo:
+         
+                couleurDispo.remove(C[i])
+
+   
+        # Plus de couleur dispo 
+        if(len(couleurDispo) == 0):
+            #print("pas de couleur dispo")
+            couleurMax+=1
+            couleurDispo.add(couleurMax)
+          
+        
+        C[v] = min(couleurDispo)
+   
+        U.remove(v)
+
+
+    return C
+
 
 
 # Permet de faire un graphe pas rapport au fichier et de l'afficher 
