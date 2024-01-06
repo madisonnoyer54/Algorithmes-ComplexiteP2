@@ -441,7 +441,7 @@ def DsaturWithFFDpacking(listObjets, tailleBoite):
 
             # Verif les conflits 
             for couple in boite[1]:
-                if objetC == couple[2]: 
+                if objetC != couple[2]: 
                     conflit_present = True
                     break
 
@@ -466,6 +466,7 @@ def DsaturWithFFDpacking(listObjets, tailleBoite):
 remplissageQ5_125 = DsaturWithFFDpacking(grapheColor_125,150)
 #print("nombre de paquet utiliser pour 125:",len(remplissageQ5_125))
 #afficheDetailBoite(remplissage)
+print(len(remplissageQ5_125))
 
 remplissageQ5_250 = DsaturWithFFDpacking(grapheColor_250,150)
 #print("nombre de paquet utiliser pour 250:",len(remplissageQ5_250))
@@ -501,7 +502,7 @@ def DsaturWithBFDpacking(listObjets, tailleBoite):
 
             # Verif les conflits 
             for couple in boite[1]: 
-                if objetC == couple[2]:  
+                if objetC != couple[2]:  
                     conflit_present = True
                     break
 
@@ -524,7 +525,9 @@ def DsaturWithBFDpacking(listObjets, tailleBoite):
 ## TESTE
 remplissageQ6_125 = DsaturWithBFDpacking(grapheColor_125,150)
 #print("nombre de paquet utiliser pour 125:",len(remplissageQ6_125))
-#afficheDetailBoite(remplissage)
+#afficheDetailBoite(remplissageQ6_125)
+
+
 
 remplissageQ6_250 = DsaturWithBFDpacking(grapheColor_250,150)
 #print("nombre de paquet utiliser pour 250:",len(remplissageQ6_250))

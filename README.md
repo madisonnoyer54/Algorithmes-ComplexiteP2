@@ -57,6 +57,6 @@ Un récapitulatif sous forme de tableau s'affiche dans le terminal. (Voir Tablea
 
 
 Conclusion :
-Je tiens à préciser que la création des graphes peut prendre plusieurs minutes, surtout pour le graphe à 1000 sommets. Les questions Q5 et Q6 montrent des résultats plus intéressants mais nécessitent plus de temps en comparaison avec Q2 et Q3.
+Je tiens à préciser que la création des graphes peut prendre plusieurs minutes, surtout pour le graphe à 1000 sommets. Les questions Q5 et Q6 montrent des résultats moins et nécessitent plus de temps en comparaison avec Q2 et Q3. Pour les Q5 et Q6, les paquet sont crée grâce au couleur des sommets. Si il ont la même couleur il n'ont pas de conflit.
 
 
