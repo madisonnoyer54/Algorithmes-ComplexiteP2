@@ -1,5 +1,10 @@
 # Algorithmes-ComplexiteP2
 
+## Desciption 
+Projet réalisé en Master 1 Informatique dans le cadre de l'UE Algorithmes et Complexité.
+Le code présenté est un projet de gestion de packing basé sur des algorithmes d’optimisation. Il utilise des structures de données comme des listes et des graphes pour organiser et traiter des objets (ou boîtes) en fonction de leur poids et de leurs contraintes de compatibilité.
+
+
 Lancement du programme :
 python3 main.py 
 
